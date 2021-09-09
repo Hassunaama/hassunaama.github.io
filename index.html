@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script language="JavaScript" type="text/javascript" src="/assets/js/termlib.js"></script>
-	<script language="JavaScript" type="text/javascript" src="/assets/js/termlib_parser.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/assets/js/termlib_parser.js"></script>
+    <link rel="stylesheet" href="/assets/css/terminal.css">
     <script language="JavaScript" type="text/javascript">
 <!--
 
@@ -355,149 +356,7 @@ li {
 <body bgcolor="#222222" link="#77dd11" text="#cccccc" alink="#dddddd" vlink="#77dd11"
 topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
 
-<table border="0" cellspacing="20" cellpadding="0" align="center">
-<tr>
-	<td nowrap><a href="index.html">termlib.js home</a></td>
-	<td>|</td>
-	<td nowrap><a href="multiterm_test.html">multiple terminals</a></td>
-	<td>|</td>
-	<td nowrap>parser</td>
-	<td>|</td>
-	<td nowrap><a href="faq.html">faq</a></td>
-	<td>|</td>
-	<td nowrap><a href="readme.txt" title="readme.txt (text/plain)">documentation</a></td>
-	<td>|</td>
-	<td nowrap><a href="samples.html">samples</a></td>
-</tr>
-</table>
 
-<table border="0" cellspacing="20" cellpadding="0" width="100%">
-	<tr valign="top">
-	<td nowrap>
-		<table border="0" cellspacing="0" cellpadding="0" width="190" class="inventory">
-		<tr><td nowrap valign="top">
-			Sample Parser Test<br>&nbsp;
-		</td></tr>
-		<tr><td nowrap>
-			<a href="javascript:termOpen()" onfocus="if(this.blur)this.blur();" onmouseover="window.status='open terminal'; return true" onmouseout="window.status=''; return true" class="termopen">&gt; open terminal &nbsp;</a>
-		</td></tr>
-		<tr><td nowrap>
-			&nbsp;
-		</td></tr>
-		<tr><td nowrap class="lh15">
-			&nbsp;<br>
-			(c) mass:werk,<br>N. Landsteiner 2003-2010<br>
-			<a href="http://www.masswerk.at/" target="_blank">http://www.masswerk.at</a>
-		</td></tr>
-		</table>
-	</td>
-	<td id="mainPane" align="center">
-		<table border="0" cellspacing="0" cellpadding="0" width="660">
-		<tr><td align="left"  class="lh15" id="mainPane">
-
-		<p><b style="letter-spacing: 1px;">Sample Parser</b><br>&nbsp;</p>
-		<p>The parser provides a solid basis for any command evaluation for &quot;termlib.js&quot;. It splits the current command line to arguments (words) and takes care of any white space and quotes. Even escape characters and options are supported.</p>
-		<p>&nbsp;<br><b>Synopsis:</b></p>
-<pre>
-  var parser = new Parser();
-  parser.parseLine(this);
-  var command = this.argv[this.argc++];
-</pre>
-		<p>&nbsp;<br><b>Usage:</b></p>
-
-		<p>Call method &quot;<tt>parseLine(this)</tt>&quot; from inside of your Terminal-handler.
-		This will parse the current command line to chunks separated by any amount of
-		white space (see property <tt>whiteSpace</tt>).
-		<tt>&quot;parseLine&quot;</tt> will inject the following properties into the Terminal instance:</p>
-
-		<table border="0" cellspacing="0" cellpadding="2" style="margin-left: 20px;">
-		<tr valign="top">
-			<td nowrap><tt>this.argv</tt>:&nbsp;</td>
-			<td>Array of parsed chunks (words, arguments)</td>
-		</tr>
-		<tr valign="top">
-			<td nowrap><tt>this.argQL</tt>:&nbsp;</td>
-			<td>Array of quoting level per argument<br>
-				This array will contain the according quote character or an empty string for each element of argv with the same index.</td>
-		</tr>
-		<tr valign="top">
-			<td nowrap><tt>this.argc</tt>:&nbsp;</td>
-			<td>A pointer to <tt>this.argv</tt> and <tt>this.argQL</tt> (initially set to <tt>0</tt>; used by method <tt>getopt</tt>).</td>
-		</tr>
-		</table>
-		
-		<p>Example:</p>
-		<table border="0" cellspacing="0" cellpadding="0">
-		<tr><td nowrap>For the string:</td><td>&nbsp;</td><td><span class="pale">This is &quot;quoted&quot;.</span></td></tr>
-		<tr><td nowrap><tt>argv</tt> will result to:</td><td>&nbsp;</td><td><span class="pale">['this', 'is', 'quoted', '.']</span></td></tr>
-		<tr><td nowrap>and <tt>argQL</tt> will result to:</td><td>&nbsp;</td><td><span class="pale">['', '', '&quot;', '']</span></td></tr>
-		</table>
-		<p>(Provided that '&quot;' is defined as a quote character. Defaults: ', &quot;, and `)</p>
-	
-		<p>&nbsp;<br><tt>getopt(this, &quot;&lt;options&gt;&quot;)</tt>:</p>
-		<p>Call this method from inside of your handler to parse any options from the
-		next chunk in <tt>this.argv</tt> that <tt>this.argc</tt> points to.<br>
-		Options are considered any arguments preceded by an option character in the
-		property <tt>optionChars</tt> (default: &quot;-&quot;). The second argument is a string
-		containing all characters to be considered legal option flags.<br>
-		The method returns an object with a property of type object for any option
-		flag (defined as a character in the options-string) found in <tt>argv</tt>.
-		argc will be advanced to the first element of <tt>argv</tt> that is not an option.
-		Each of the flag-objects will contain the property `<tt>value</tt>'.<br>
-		In case that the option flag was immediately followed by  a number
-		(unsigned float value), this will be stored as a Number in the <tt>value</tt>,
-		otherwise the flag's <tt>value</tt> will be set to <tt>-1</tt>.<br>
-		Any flags that were not defined in the options-string will be stored in
-		an array of single characters in the property `<tt>illegals</tt>' of the returned object.</p>
-
-		<p>Example:</p>
-<pre>
-   this.argv: [&quot;test&quot;, &quot;-en7a&quot;, &quot;-f&quot;, &quot;next&quot;]
-   this.argc: set initially to 0
-
-   var command = this.argv[this.argc++];    // this.argc now points to 2nd chunk
-   var options = parser.getopt(this, &quot;en&quot;);
-</pre>
-		<p><tt>getopt</tt> will return the following object:</p>
-<pre>   {
-      'e': { value: -1 },
-      'n': { value: 7 },
-      'illegals': ['a', 'f']
-   }</pre>
-		<p>and <tt>this.argc</tt> will be set to <tt>3</tt>, pointing to &quot;next&quot;.</p>
-		<p>Note: Quoted terms are never parsed as options.</p>
-
-		<p>&nbsp;<br><b>Escape expressions:</b></p>
-		<p>The parser can handle escape sequences, e.g.: hexdecimal notations of
-		characters that are preceded by an escape character. (default: parse any
-		2-byte hex expressions preceded by &quot;%&quot; as a character,  e.g. &quot;%41&quot; =&gt; &quot;A&quot;.)<br>
-		Escape characters are defined in the property <tt>escapeExpressions</tt> (type object) with the
-		according method as their value. (The given function or method must be present
-		at creation and takes four arguments: terminal instance, current char-position,
-		the escape character found, and the current quoting level. The method or function
-		is expected to strip any escape sequence of the lineBuffer and to return a string
-		to be inserted at the current parsing position.)<br>
-		The result of an escape expression will allways add to the current chunk and will never result in parsed white space.</p>
-
-		<p>&nbsp;<br><b>Configuration:</b></p>
-		<p>You may want to overide the follow objects (or add properties):</p>
-
-		<table border="0" cellspacing="0" cellpadding="2" style="margin-left: 20px;">
-		<tr><td nowrap>parser.<tt>whiteSpace</tt>:&nbsp;</td><td>chars to be parsed as white space (default: space, tab)</td></tr>
-		<tr><td nowrap>parser.<tt>quoteChars</tt>:&nbsp;</td><td>chars to be parsed as quotes (default: &quot;, ', `)</td></tr>
-		<tr><td nowrap>parser.<tt>singleEscapes</tt>:&nbsp;</td><td>chars to escape a quote or escape expression (default: \)</td></tr>
-		<tr><td nowrap>parser.<tt>optionChars</tt>:&nbsp;</td><td>chars that start an option (default: -)</td></tr>
-		<tr><td nowrap>parser.<tt>escapeExpressions</tt>:&nbsp;</td><td>chars that start escape expressions (default: % =&gt; 2-byte hex)</td></tr>
-		</table>
-
-		<p>&nbsp;<br>Notes:<br>
-		v. 1.1: Parser is now a function with a constructor.<br>
-		Configurations can be handled at a per-instance basis.<br>
-		Parser is now a single, self-contained object in the global name space.<br>
-		Note on the implementation: We are not storing the terminal instance in order to avoid memory leakage.</p>
-		
-		<p>&nbsp;</p>
-		<p><b>Alternate Implementation Example</b> &ndash; not UNIX-like:<br>(for a sane implementation see the source of this file.)</p>
 <pre class="pale">
 // a simple command shell,
 // toggeling &quot;-&quot; (minus) and &quot;/&quot; (forward slash) as the option character
@@ -694,7 +553,7 @@ function commandShell() {
 </tr>
 </table>
 
-<div id="termDiv" style="position:absolute; visibility: hidden; z-index:1;"></div>
+<div id="termDiv" style="position:absolute; visibility: hidden; z-index:1;" class="terminal"></div>
 
 </body>
 </html>
