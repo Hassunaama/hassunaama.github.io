@@ -20,6 +20,55 @@
 
 var term, parser;
 
+var files = {
+   &quot;initscreen&quot;: [
+      &quot;*** Quick and Dumb Shell v. 1.0 ***&quot;,
+      &quot;Nanofluffy Corporation 1982&quot;,
+      &quot;ready.&quot;,
+      &quot;type 'help' for a list of commands.&quot;
+    ],
+    &quot;projects&quot;: [
+      &quot;*** My projects ***&quot;,
+      &quot;UIGD /uigd&quot;,
+      &quot;FEPL /fepl&quot;,
+      &quot;Type 'help' for a list of commands.&quot;
+    ],
+    &quot;test&quot;: [
+       &quot;You found the egg&quot;
+       &quot;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam&quot;,
+       &quot;facilisis enim. Pellentesque in elit et lacus euismod dignissim.&quot;,
+       &quot;Aliquam dolor pede, convallis eget, dictum a, blandit ac, urna.&quot;,
+       &quot;Pellentesque sed nunc ut justo volutpat egestas. Class aptent&quot;,
+       &quot;taciti sociosqu ad litora torquent per conubia nostra, per inceptos&quot;,
+       &quot;hymenaeos. In erat. Suspendisse potenti. Fusce faucibus nibh sed&quot;,
+       &quot;nisi. Phasellus faucibus, dui a cursus dapibus, mauris nulla&quot;,
+       &quot;euismod velit, a lobortis turpis arcu vel dui. Pellentesque&quot;,
+       &quot;fermentum ultrices pede. Donec auctor lectus eu arcu. Curabitur&quot;,
+       &quot;non orci eget est porta gravida. Aliquam pretium orci id nisi.&quot;,
+       &quot;Duis faucibus, mi non adipiscing venenatis, erat urna aliquet&quot;,
+       &quot;elit, eu fringilla lacus tellus quis erat. Nam tempus ornare&quot;,
+       &quot;lorem. Nullam feugiat. Lorem ipsum dolor sit amet, consectetuer&quot;,
+       &quot;adipiscing elit. Nam facilisis enim. Pellentesque in elit et lacus&quot;,
+       &quot;euismod dignissim. Aliquam dolor pede, convallis eget, dictum a,&quot;,
+       &quot;blandit ac, urna. Pellentesque sed nunc ut justo volutpat egestas.&quot;,
+       &quot;Class aptent taciti sociosqu ad litora torquent per conubia nostra,&quot;,
+       &quot;per inceptos hymenaeos. In erat. Suspendisse potenti. Fusce&quot;,
+       &quot;faucibus nibh sed nisi. Phasellus faucibus, dui a cursus dapibus,&quot;,
+       &quot;mauris nulla euismod velit, a lobortis turpis arcu vel dui.&quot;,
+       &quot;Pellentesque fermentum ultrices pede. Donec auctor lectus eu arcu.&quot;,
+       &quot;Curabitur non orci eget est porta gravida. Aliquam pretium orci id&quot;,
+       &quot;nisi. Duis faucibus, mi non adipiscing venenatis, erat urna aliquet&quot;,
+       &quot;elit, eu fringilla lacus tellus quis erat. Nam tempus ornare lorem.&quot;,
+       &quot;Nullam feugiat. Lorem ipsum dolor sit amet, consectetuer adipiscing&quot;,
+       &quot;elit. Nam facilisis enim. Pellentesque in elit et lacus euismod&quot;,
+       &quot;dignissim. Aliquam dolor pede, convallis eget, dictum a, blandit ac,&quot;,
+       &quot;urna. Pellentesque sed nunc ut justo volutpat egestas. Class aptent&quot;,
+       &quot;taciti sociosqu ad litora torquent per conubia nostra, per inceptos&quot;,
+       &quot;hymenaeos. In erat. Suspendisse potenti. Fusce faucibus nibh sed nisi.&quot;,
+       &quot;Phasellus faucibus, dui a cursus dapibus, mauris nulla euismod velit,&quot;,
+       &quot;a lobortis dui: The quick brown fox jumps over the lazy dog.&quot;
+    ]
+};
 var helpPage=[
 	'%CS%+r Terminal Help %-r%n',
 	'  This is just a sample to demonstrate command line parsing.',
