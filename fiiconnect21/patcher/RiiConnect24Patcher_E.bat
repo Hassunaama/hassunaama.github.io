@@ -5930,6 +5930,7 @@ echo %string270%
 echo.
 echo 1. %string271%
 echo 2. %string272%
+goto end
 if %preboot_environment%==1 echo 3. %string489%
 set /p s=%string26%: 
 if %s%==1 goto script_start
