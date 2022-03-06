@@ -9784,7 +9784,8 @@ if %exiting%==0 echo :          :
 if %exiting%==0 exit
 if %timeouterror%==0 %timeout_path% 1 /nobreak >NUL
 if %timeouterror%==1 ping localhost -n 2 >NUL
-set /a exiting=%exiting%-1
+::set /a exiting=%exiting%-1
+exit
 goto end1
 
 :troubleshooting_auto_tool
