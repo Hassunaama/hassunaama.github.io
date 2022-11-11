@@ -11,7 +11,7 @@
 
 body {
     /*background-color: black;*/
-    background: no-repeat cover fixed url("https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__340.png");
+    background: no-repeat, cover, fixed, url("https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683__340.png");
 }
 
 .content {
